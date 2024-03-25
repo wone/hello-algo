@@ -30,6 +30,8 @@ public class zigzag_tree_traversal {
             }
             System.out.println();
         }
+
+//        zigzagLevelOrder2(root);
     }
     // 层序遍历 tree
     public static void printTreeByLevelOrder(TreeNode root) {
@@ -52,7 +54,8 @@ public class zigzag_tree_traversal {
 
     
     /**
-     * Zigzag遍历（也称之为蛇形遍历）是一种特殊的树遍历方式，它按层遍历树的节点，但在每一层上，节点的访问顺序会发生变化。在奇数层（从根节点开始计数），我们按从左到右的顺序访问节点；在偶数层，我们按从右到左的顺序访问节点。
+     * Zigzag遍历（也称之为蛇形遍历）是一种特殊的树遍历方式，它按层遍历树的节点，但在每一层上，节点的访问顺序会发生变化。
+     * 在奇数层（从根节点开始计数），我们按从左到右的顺序访问节点；在偶数层，我们按从右到左的顺序访问节点。
      *
      * 给定一个完全二叉树，我们可以使用以下解题思路来实现Zigzag遍历：
      *
@@ -79,14 +82,16 @@ public class zigzag_tree_traversal {
         if (root == null) {
             return result;
         }
-
+        // 存当前层
         Stack<TreeNode> stack1 = new Stack<>();
+        // 存下一层
         Stack<TreeNode> stack2 = new Stack<>();
         stack1.push(root);
         boolean leftToRight = true;
 
         while (!stack1.isEmpty()) {
             List<Integer> currentLevel = new ArrayList<>();
+            // 循环遍历当前层，并将当前层的子节点加入到 stack2
             while (!stack1.isEmpty()) {
                 TreeNode node = stack1.pop();
                 currentLevel.add(node.val);
@@ -108,7 +113,9 @@ public class zigzag_tree_traversal {
                 }
             }
             result.add(currentLevel);
+            // stack1 为空说明，当前层遍历完毕，需要重置leftToRight
             leftToRight = !leftToRight;
+            // 将存储下一层节点的 stack 和上一层 stack 交换下
             Stack<TreeNode> temp = stack1;
             stack1 = stack2;
             stack2 = temp;
