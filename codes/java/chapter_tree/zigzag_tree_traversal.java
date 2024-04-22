@@ -32,7 +32,24 @@ public class zigzag_tree_traversal {
         }
 
 //        zigzagLevelOrder2(root);
+        int maxDepth = maxDepth(root);
+        System.out.println("\n maxDepth : " + maxDepth );
     }
+
+    // 计算二叉树的深度
+    public static int maxDepth(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        // 递归计算左子树和右子树的深度
+        int leftDepth = maxDepth(node.left);
+        int rightDepth = maxDepth(node.right);
+
+        // 当前节点的深度为较大者加1
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
     // 层序遍历 tree
     public static void printTreeByLevelOrder(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
