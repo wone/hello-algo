@@ -9,6 +9,9 @@ package chapter_tree;
 import utils.*;
 import java.util.*;
 
+/**
+ * 深度遍历
+ */
 public class binary_tree_dfs {
     // 初始化列表，用于存储遍历序列
     static ArrayList<Integer> list = new ArrayList<>();
@@ -65,4 +68,27 @@ public class binary_tree_dfs {
         postOrder(root);
         System.out.println("\n后序遍历的节点打印序列 = " + list);
     }
+
+    /**
+     * 判断两个二叉树是否完全相等
+     */
+    public static boolean areTreesEqual(TreeNode tree1, TreeNode tree2) {
+        if (tree1 == null && tree2 == null) {
+            return true;
+        }
+
+        if (tree1 == null || tree2 == null) {
+            return false;
+        }
+
+        if (tree1.val != tree2.val) {
+            return false;
+        }
+
+        boolean leftEqual = areTreesEqual(tree1.left, tree2.left);
+        boolean rightEqual = areTreesEqual(tree1.right, tree2.right);
+
+        return leftEqual && rightEqual;
+    }
+
 }

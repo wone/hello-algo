@@ -9,6 +9,9 @@ package chapter_tree;
 import utils.*;
 import java.util.*;
 
+/**
+ * 广度遍历
+ */
 public class binary_tree_bfs {
     /* 层序遍历 */
     static List<Integer> levelOrder(TreeNode root) {
@@ -38,5 +41,58 @@ public class binary_tree_bfs {
         /* 层序遍历 */
         List<Integer> list = levelOrder(root);
         System.out.println("\n层序遍历的节点打印序列 = " + list);
+
+        List<Integer> list2 = levelOrder2(root);
+        System.out.println("\n层序遍历的节点打印序列 = " + list2);
+
+        List<Integer> list3 = levelTraversal(root);
+        System.out.println("\n层序遍历的节点打印序列 = " + list3);
+    }
+
+    // 广度优先遍历
+    public static List<Integer> levelOrder2(TreeNode rootNode) {
+        // 初始化队列，加入根节点
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(rootNode);
+
+        // 初始化列表，作为遍历访问的结果
+        List<Integer> result = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            result.add(node.val);
+
+            // 将左子节点加入队列
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            // 将右子节点加入队列
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+
+        return result;
+    }
+
+    public static List<Integer> levelTraversal(TreeNode rootNode) {
+        List<Integer> result = new ArrayList<>();
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(rootNode);
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            result.add(node.val);
+
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+
+        return result;
     }
 }

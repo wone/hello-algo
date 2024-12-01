@@ -29,11 +29,30 @@ public class top_k {
         return heap;
     }
 
+    static Queue<Integer> topKHeap2(int[] nums, int k) {
+        // 初始化min heap
+        Queue<Integer> heap = new PriorityQueue<Integer>();
+        // 将前 K 个元素入堆
+        for (int i = 0; i < k; i++) {
+            heap.offer(nums[i]);
+        }
+
+        for (int i = k; i < nums.length; i++) {
+            // retrieves but not remove the head of the queue
+            if (heap.peek() < nums[i]) {
+                // retrieves and remove the head of the queue
+                heap.poll();
+                heap.offer(nums[i]);
+            }
+        }
+        return heap;
+    }
+
     public static void main(String[] args) {
-        int[] nums = { 1, 7, 6, 3, 2 };
+        int[] nums = { 1, 7, 6, 3, 2, 11, 4 };
         int k = 3;
 
-        Queue<Integer> res = topKHeap(nums, k);
+        Queue<Integer> res = topKHeap2(nums, k);
         System.out.println("最大的 " + k + " 个元素为");
         PrintUtil.printHeap(res);
     }
