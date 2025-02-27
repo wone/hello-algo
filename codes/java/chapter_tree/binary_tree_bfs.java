@@ -10,7 +10,7 @@ import utils.*;
 import java.util.*;
 
 /**
- * 广度遍历
+ * 广度遍历: 层序遍历
  */
 public class binary_tree_bfs {
     /* 层序遍历 */
@@ -29,6 +29,24 @@ public class binary_tree_bfs {
                 queue.offer(node.right);  // 右子节点入队
         }
         return list;
+    }
+
+    public static List<Integer> levelOrder3(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        List<Integer> result = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            result.add(node.val);
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {

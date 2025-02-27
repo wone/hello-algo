@@ -67,6 +67,9 @@ public class binary_tree_dfs {
         list.clear();
         postOrder(root);
         System.out.println("\n后序遍历的节点打印序列 = " + list);
+
+        List<Integer> result = inorderTraversal(root);
+        System.out.println("\n非递归中序遍历的节点打印序列 = " + result);
     }
 
     /**
@@ -89,6 +92,31 @@ public class binary_tree_dfs {
         boolean rightEqual = areTreesEqual(tree1.right, tree2.right);
 
         return leftEqual && rightEqual;
+    }
+
+    /**
+     * 非递归的方式实现中序遍历
+     * @param root
+     * @return
+     */
+    public static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        while (current != null || !stack.isEmpty()) {
+            // 遍历到最左边的节点，将路径上的节点都压入栈中
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+            // 弹出栈顶节点并访问
+            current = stack.pop();
+            // 访问将该节点的值
+            result.add(current.val);
+            // 转向右子树
+            current = current.right;
+        }
+        return result;
     }
 
 }

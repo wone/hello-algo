@@ -44,7 +44,7 @@ public class SolutionHashSet {
      * @return
      */
     public int longestConsecutive(int[] nums) {
-        HashSet<Integer> numSet = new HashSet<>();g
+        HashSet<Integer> numSet = new HashSet<>();
 
         // 将所有元素添加到哈希表中
         for (int num : nums) {
